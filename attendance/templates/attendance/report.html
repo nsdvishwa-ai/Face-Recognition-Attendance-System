@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Report</title>
+</head>
+<body>
+
+<h1>Attendance Report</h1>
+
+<form method="GET">
+
+    <input
+        type="text"
+        name="name"
+        placeholder="Employee Name">
+
+    <input
+        type="date"
+        name="date">
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+
+<br>
+
+<table border="1">
+
+<tr>
+    <th>Employee</th>
+    <th>Date</th>
+    <th>Time</th>
+</tr>
+
+{% for record in records %}
+
+<tr>
+    <td>{{ record.employee.name }}</td>
+    <td>{{ record.date }}</td>
+    <td>{{ record.time }}</td>
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="3">
+        No Records Found
+    </td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/">
+    <button>Dashboard</button>
+</a>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance System</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background: #1e1e2f;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            width: 250px;
+        }
+
+        .sidebar a {
+            color: white;
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            margin: 5px 0;
+        }
+
+        .sidebar a:hover {
+            background: #343a40;
+            border-radius: 5px;
+        }
+
+        .main {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .card-box {
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+        }
+
+        .blue { background: #0d6efd; }
+        .green { background: #198754; }
+        .red { background: #dc3545; }
+        .yellow { background: #ffc107; color: black; }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h3>📊 Attendance</h3>
+
+    <a href="/">Dashboard</a>
+    <a href="/recognize/">Mark Attendance</a>
+    <a href="/report/">Reports</a>
+    <a href="/monthly/">Monthly Report</a>
+    <a href="/percentage/">Percentage</a>
+    <a href="/export/">Export Excel</a>
+    <a href="/history/">Attendance History</a>
+    <a href="/logout/">Logout</a>
+    
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <h2>Welcome Admin 👋</h2>
+
+    <div class="row mt-4">
+
+        <div class="col-md-3">
+            <div class="card-box blue">
+                <h5>Total Employees</h5>
+                <h2>{{ total_employees }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-box green">
+                <h5>Present Today</h5>
+                <h2>{{ today_attendance }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-box red">
+                <h5>Absent</h5>
+                <h2>{{ absent_employees }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-box yellow">
+                <h5>Status</h5>
+                <h2>Active</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <!-- SINGLE CANVAS ONLY -->
+    <canvas id="chart" width="250" height="250"></canvas>
+
+</div>
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+let present = Number("{{ today_attendance|default:0 }}");
+let absent = Number("{{ absent_employees|default:0 }}");
+
+let ctx = document.getElementById("chart").getContext("2d");
+
+new Chart(ctx, {
+    type: "pie",
+    data: {
+        labels: ["Present", "Absent"],
+        datasets: [{
+            data: [present, absent],
+            backgroundColor: ["#198754", "#dc3545"]
+        }]
+    },
+    options: {
+        responsive: false,
+        maintainAspectRatio: false
+    }
+});
+</script>
+
+</body>
+</html>

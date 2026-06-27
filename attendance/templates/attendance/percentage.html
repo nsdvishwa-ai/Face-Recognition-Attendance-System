@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Percentage</title>
+</head>
+<body>
+
+<h1>Attendance Percentage Report</h1>
+
+<table border="1">
+
+<tr>
+    <th>Employee</th>
+    <th>Present Days</th>
+    <th>Total Working Days</th>
+    <th>Percentage</th>
+</tr>
+
+{% for row in data %}
+
+<tr>
+    <td>{{ row.employee.name }}</td>
+    <td>{{ row.present_days }}</td>
+    <td>{{ row.total_days }}</td>
+    <td>{{ row.percentage }}%</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/">
+    <button>Dashboard</button>
+</a>
+
+</body>
+</html>
