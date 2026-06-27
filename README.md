@@ -18,3 +18,12 @@
 
 ### Excel Export
 ![Excel](screenshots/Excel_Report.png)
+
+---
+
+## 📷 Face Recognition Camera Module
+
+### Camera Page (Start Attendance)
+![Camera Page](screenshots/Camera_Page.png)
+
+> This page opens the webcam and performs real-time face recognition for marking attendance automatically.
